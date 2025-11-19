@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emir Koyunoğlu | Cloud & DevOps Specialist</title>
+    <meta name="description" content="Portfolio of Emir Koyunoğlu - AWS Certified Cloud Practitioner & DevOps Engineer">
+
+    <!-- Fonts: Inter (Apple-like clean sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons: Lucide (Modern, clean lines) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Config for Apple/Google Hybrid Feel -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable class-based dark mode
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        ios: {
+                            bg: '#F5F5F7',
+                            card: 'rgba(255, 255, 255, 0.7)',
+                            blue: '#007AFF',
+                            gray: '#86868b',
+                            dark: '#1d1d1f'
+                        },
+                        devops: {
+                            primary: '#2563EB', // Blue
+                            secondary: '#FF9900', // AWS Orange hint
+                        }
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F5F5F7;
+            /* Light mode gradient */
+            background-image: radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 0) 0, hsla(253, 16%, 7%, 0) 50%), radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 0.05) 0, hsla(225, 39%, 30%, 0) 50%), radial-gradient(at 100% 0%, hsla(190, 49%, 30%, 0) 0, hsla(190, 49%, 30%, 0) 50%);
+            transition: background-color 0.3s ease;
+        }
+
+        /* Dark mode override */
+        html.dark body {
+            background-color: #0f172a;
+            /* Slate 900 */
+            background-image: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0, transparent 50%), radial-gradient(at 50% 100%, rgba(168, 85, 247, 0.1) 0, transparent 50%);
+        }
+
+        /* Glassmorphism Card Utility - Light */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+        }
+
+        /* Glassmorphism Card Utility - Dark */
+        html.dark .glass-card {
+            background: rgba(30, 41, 59, 0.60);
+            /* Slate 800 with opacity */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hide Scrollbar but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Smooth Selection */
+        ::selection {
+            background: #007AFF;
+            color: white;
+        }
+    </style>
+</head>
+
+<body
+    class="text-slate-800 dark:text-slate-200 antialiased selection:bg-blue-500 selection:text-white pb-24 md:pb-0 transition-colors duration-300">
+
+    <!-- Dark Mode Toggle (Absolute Top Right) -->
+    <button id="theme-toggle"
+        class="fixed top-6 right-6 z-50 p-3 rounded-full glass-card text-slate-600 dark:text-slate-300 hover:scale-110 transition-transform shadow-lg group"
+        aria-label="Toggle Dark Mode">
+        <!-- Sun Icon (Show in Dark) -->
+        <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
+        <!-- Moon Icon (Show in Light) -->
+        <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-slate-600 group-hover:text-blue-600"></i>
+    </button>
+
+    <!-- Navigation (Floating Island Style with Text) -->
+    <nav class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 w-auto max-w-[95vw]">
+        <div
+            class="glass-card rounded-full px-6 py-3 flex items-center gap-4 md:gap-8 shadow-2xl transition-all hover:scale-[1.02] duration-300">
+
+            <a href="#profile"
+                class="nav-item group flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors gap-0.5"
+                aria-label="Home">
+                <i data-lucide="home"
+                    class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform duration-200"></i>
+                <span class="text-[10px] font-medium">Profile</span>
+            </a>
+
+            <a href="#skills"
+                class="nav-item group flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors gap-0.5"
+                aria-label="Skills">
+                <i data-lucide="cpu" class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform duration-200"></i>
+                <span class="text-[10px] font-medium">Skills</span>
+            </a>
+
+            <a href="#experience"
+                class="nav-item group flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors gap-0.5"
+                aria-label="Experience">
+                <i data-lucide="briefcase"
+                    class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform duration-200"></i>
+                <span class="text-[10px] font-medium">Experience</span>
+            </a>
+
+            <a href="#projects"
+                class="nav-item group flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors gap-0.5"
+                aria-label="Projects">
+                <i data-lucide="folder-git-2"
+                    class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform duration-200"></i>
+                <span class="text-[10px] font-medium">Projects</span>
+            </a>
+
+            <div class="w-px h-8 bg-slate-300 dark:bg-slate-600 mx-1"></div>
+
+            <a href="mailto:emirkoyunoglu@hotmail.com"
+                class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-bold text-sm flex flex-col items-center gap-0.5 group">
+                <i data-lucide="send"
+                    class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform duration-200"></i>
+                <span class="text-[10px]">Hire Me</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Wrapper -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-6">
+
+        <!-- Section 1: Hero & Intro (Bento Grid Layout) -->
+        <div id="profile" class="grid grid-cols-1 md:grid-cols-5 gap-6">
+
+            <!-- Profile Card (Expanded to fill space) -->
+            <div
+                class="glass-card rounded-3xl p-8 col-span-1 md:col-span-3 flex flex-col animate-fade-in relative overflow-hidden group bg-gradient-to-br from-white/80 to-white/40 dark:from-slate-800/80 dark:to-slate-900/40">
+                <div
+                    class="absolute top-0 right-0 w-96 h-96 bg-blue-400 dark:bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500 animate-float pointer-events-none">
+                </div>
+
+                <!-- Header with Profile Photo -->
+                <div class="flex flex-col md:flex-row items-start gap-6 mb-6 relative z-10">
+                    <!-- Profile Photo (Top Left) -->
+                    <div class="shrink-0">
+                        <div
+                            class="w-32 h-32 md:w-36 md:h-36 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-700 relative group-hover:scale-[1.02] transition-transform duration-500">
+                            <img src="photo.jpg" alt="Emir Koyunoğlu" class="w-full h-full object-cover">
+                            <!-- Overlay Gradient -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            </div>
+                        </div>
+
+                        <!-- Open to Work Badge - Moved under photo -->
+                        <div class="mt-3">
+                            <span
+                                class="inline-flex w-full px-3 py-1.5 rounded-full bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 text-sm font-bold border border-green-200 dark:border-green-800 items-center justify-center gap-2 shadow-sm hover:shadow-md transition-shadow">
+                                <span class="w-2 h-2 rounded-full bg-green-600 dark:bg-green-400 animate-pulse"></span>
+                                Open to Work
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Name and Title -->
+                    <div class="flex-1">
+                        <h1
+                            class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-3">
+                            Emir<br><span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">Koyunoğlu</span>
+                        </h1>
+
+                        <p class="text-lg md:text-xl text-black dark:text-slate-300 font-medium mb-4">
+                            Management Information Systems<br>
+                            DevOps Specialist<br>
+                            AWS & Linux System Administrator
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="relative z-10 mb-6">
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl text-base md:text-lg">
+                        I'm an AWS Certified Cloud Practitioner with a strong foundation in DevOps, reinforced through
+                        an intensive Cloud Engineering bootcamp. I built hands-on experience with Kubernetes, Docker,
+                        Terraform, and CI/CD pipelines through practical training projects and developed strong
+                        operational skills as an IT Helpdesk and System Administrator Intern. I am eager to apply this
+                        blend of cloud automation knowledge and on-premise experience to improve reliability and
+                        efficiency in a DevOps Specialist role.
+                    </p>
+                </div>
+
+                <!-- Action Buttons and Social Links -->
+                <div
+                    class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative z-10 mt-auto">
+                    <!-- Primary Action Buttons -->
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#"
+                            onclick="document.getElementById('contact-toast').classList.remove('hidden'); setTimeout(() => document.getElementById('contact-toast').classList.add('hidden'), 3000);"
+                            class="bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-900 px-6 py-3 rounded-full font-medium transition-all active:scale-95 flex items-center gap-2 shadow-lg shadow-slate-900/20 dark:shadow-white/5">
+                            <i data-lucide="download" class="w-4 h-4"></i> Download CV
+                        </a>
+
+                        <a href="mailto:emirkoyunoglu@hotmail.com"
+                            class="bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-600 px-6 py-3 rounded-full font-medium transition-all active:scale-95 flex items-center gap-2 shadow-sm">
+                            <i data-lucide="send" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i> Hire Me
+                        </a>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex gap-2">
+                        <a href="mailto:emirkoyunoglu@hotmail.com"
+                            class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600 flex items-center justify-center transition-colors text-blue-600 dark:text-blue-400"
+                            title="Email">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/emir-koyunoglu" target="_blank"
+                            class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600 flex items-center justify-center transition-colors text-blue-700 dark:text-blue-400"
+                            title="LinkedIn">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://github.com/emirkoyunoglu" target="_blank"
+                            class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600 flex items-center justify-center transition-colors text-slate-900 dark:text-white"
+                            title="GitHub">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://medium.com/@emirkoyunoglu" target="_blank"
+                            class="w-12 h-12 rounded-full bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600 flex items-center justify-center transition-colors text-slate-900 dark:text-white"
+                            title="Medium">
+                            <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certification Highlight -->
+            <!-- UPDATED COLORS FOR DARK MODE CONTRAST BELOW (Silver/Aluminum Pop in Dark Mode) -->
+            <!-- Removed 'glass-card' class to avoid CSS background override. Added manual glass styles. -->
+            <div
+                class="backdrop-blur-2xl border border-white/10 shadow-2xl transition-all duration-300 rounded-3xl p-6 col-span-1 md:col-span-2 bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-200 dark:to-slate-300 text-white dark:text-slate-900 relative overflow-hidden flex flex-col h-full">
+                <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-orange-500 rounded-full blur-2xl opacity-30"></div>
+
+                <!-- Header -->
+                <h3 class="text-base font-bold text-slate-300 dark:text-slate-500 uppercase tracking-wider mb-6">
+                    Certifications</h3>
+
+                <!-- Main Certificate (AWS) - Clickable -->
+                <a href="https://www.credly.com/badges/7c146b7e-6861-4fb7-a28f-8583cf6bf379" target="_blank"
+                    class="group/main block mb-6 relative z-10 bg-white/5 dark:bg-slate-900/5 p-4 rounded-2xl hover:bg-white/10 dark:hover:bg-slate-900/10 transition-all border border-white/5 dark:border-slate-900/5">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div
+                            class="p-2 shrink-0 flex items-center justify-center h-16 w-16 bg-white dark:bg-transparent rounded-lg">
+                            <!-- AWS Logo (External - Transparent) -->
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+                                alt="AWS" class="w-12 h-12 object-contain drop-shadow-md">
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold leading-tight flex items-center gap-2 mb-1">
+                                AWS Certified
+                            </div>
+                            <div class="text-lg text-slate-300 dark:text-slate-600 font-medium">Cloud Practitioner -
+                                CLF-C02</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex gap-2">
+                            <span
+                                class="text-xs font-semibold px-2.5 py-1 rounded-md bg-orange-500/20 text-orange-300 dark:text-orange-700 border border-orange-500/30">Cloud</span>
+                            <span
+                                class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-700/50 dark:bg-slate-300/50 text-slate-300 dark:text-slate-700 border border-slate-600/30">Security</span>
+                        </div>
+                        <span
+                            class="text-[10px] font-bold text-slate-500 group-hover/main:text-orange-400 dark:group-hover/main:text-orange-700 transition-colors flex items-center gap-1">
+                            Verify <i data-lucide="external-link" class="w-3 h-3"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Divider -->
+                <div class="w-full h-px bg-white/10 dark:bg-slate-900/10 my-4"></div>
+
+                <!-- Other Certificates List -->
+                <div class="space-y-4 overflow-y-auto no-scrollbar flex-1 pr-1">
+
+                    <!-- DevOps Training -->
+                    <a href="https://verified.sertifier.com/en/verify/54093202426380" target="_blank"
+                        class="group block p-3 rounded-2xl hover:bg-white/5 dark:hover:bg-slate-900/5 transition-colors border border-transparent hover:border-white/10 dark:hover:border-slate-900/10">
+                        <div class="flex items-start gap-4">
+                            <div class="p-2 shrink-0 mt-1 text-blue-400 dark:text-blue-600">
+                                <i data-lucide="infinity" class="w-6 h-6"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between mb-1">
+                                    <p
+                                        class="text-base font-bold text-slate-200 dark:text-slate-800 truncate group-hover:text-blue-400 dark:group-hover:text-blue-700 transition-colors">
+                                        Cloud Engineering Bootcamp: DevOps</p>
+                                </div>
+                                <p class="text-sm text-slate-400 dark:text-slate-500 mb-2">Sıfırdan Zirveye |
+                                    Development & Operations</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-wrap gap-1.5">
+                                        <span
+                                            class="text-[10px] px-2 py-0.5 bg-blue-500/10 text-blue-300 dark:text-blue-700 rounded border border-blue-500/20">CI/CD</span>
+                                        <span
+                                            class="text-[10px] px-2 py-0.5 bg-blue-500/10 text-blue-300 dark:text-blue-700 rounded border border-blue-500/20">Docker</span>
+                                        <span
+                                            class="text-[10px] px-2 py-0.5 bg-blue-500/10 text-blue-300 dark:text-blue-700 rounded border border-blue-500/20">K8s</span>
+                                    </div>
+                                    <span
+                                        class="text-[10px] font-bold text-slate-500 group-hover:text-blue-400 dark:group-hover:text-blue-700 transition-colors flex items-center gap-1">
+                                        Verify <i data-lucide="external-link" class="w-3 h-3"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- AWS Training -->
+                    <a href="https://verified.sertifier.com/en/verify/40488055456432" target="_blank"
+                        class="group block p-3 rounded-2xl hover:bg-white/5 dark:hover:bg-slate-900/5 transition-colors border border-transparent hover:border-white/10 dark:hover:border-slate-900/10">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="p-2 shrink-0 mt-1 flex items-center justify-center bg-white dark:bg-transparent rounded-lg">
+                                <!-- AWS Logo (External) -->
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+                                    alt="AWS" class="w-6 h-6 object-contain">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between mb-1">
+                                    <p
+                                        class="text-base font-bold text-slate-200 dark:text-slate-800 truncate group-hover:text-orange-400 dark:group-hover:text-orange-700 transition-colors">
+                                        Cloud Engineering Bootcamp: AWS</p>
+                                </div>
+                                <p class="text-sm text-slate-400 dark:text-slate-500 mb-2">Sıfırdan Zirveye | Amazon Web
+                                    Services</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-wrap gap-1.5">
+                                        <span
+                                            class="text-[10px] px-2 py-0.5 bg-orange-500/10 text-orange-300 dark:text-orange-700 rounded border border-orange-500/20">EC2</span>
+                                        <span
+                                            class="text-[10px] px-2 py-0.5 bg-orange-500/10 text-orange-300 dark:text-orange-700 rounded border border-orange-500/20">VPC</span>
+                                        <span
+                                            class="text-[10px] px-2 py-0.5 bg-orange-500/10 text-orange-300 dark:text-orange-700 rounded border border-orange-500/20">S3</span>
+                                    </div>
+                                    <span
+                                        class="text-[10px] font-bold text-slate-500 group-hover:text-orange-400 dark:group-hover:text-orange-700 transition-colors flex items-center gap-1">
+                                        Verify <i data-lucide="external-link" class="w-3 h-3"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- IT Fundamentals -->
+                    <a href="https://verified.sertifier.com/en/verify/75033600283662" target="_blank"
+                        class="group block p-3 rounded-2xl hover:bg-white/5 dark:hover:bg-slate-900/5 transition-colors border border-transparent hover:border-white/10 dark:hover:border-slate-900/10">
+                        <div class="flex items-start gap-4">
+                            <div class="p-2 shrink-0 mt-1 text-green-400 dark:text-green-600">
+                                <i data-lucide="terminal" class="w-6 h-6"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between mb-1">
+                                    <p
+                                        class="text-base font-bold text-slate-200 dark:text-slate-800 truncate group-hover:text-green-400 dark:group-hover:text-green-700 transition-colors">
+                                        Cloud Engineering Bootcamp: ITF</p>
+                                </div>
+                                <p class="text-sm text-slate-400 dark:text-slate-500 mb-2">Sıfırdan Zirveye | IT
+                                    Fundamentals</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-wrap gap-1.5">
+                                        <span
+                                            class="text-[10px] px-2 py-0.5 bg-green-500/10 text-green-300 dark:text-green-700 rounded border border-green-500/20">Python</span>
+                                        <span
+                                            class="text-[10px] px-2 py-0.5 bg-green-500/10 text-green-300 dark:text-green-700 rounded border border-green-500/20">Linux</span>
+                                        <span
+                                            class="text-[10px] px-2 py-0.5 bg-green-500/10 text-green-300 dark:text-green-700 rounded border border-green-500/20">Git</span>
+                                    </div>
+                                    <span
+                                        class="text-[10px] font-bold text-slate-500 group-hover:text-green-400 dark:group-hover:text-green-700 transition-colors flex items-center gap-1">
+                                        Verify <i data-lucide="external-link" class="w-3 h-3"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+            <!-- Section 2: Skills & Technologies (Merged into Main Grid) -->
+            <!-- Tech Stack -->
+            <div id="skills" class="glass-card rounded-3xl p-8 col-span-1 md:col-span-3 flex flex-col justify-center">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold text-slate-800 dark:text-white">Technical Skills</h2>
+                    <i data-lucide="cpu" class="w-6 h-6 text-slate-400"></i>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- DevOps & Cloud -->
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">DevOps & Cloud</p>
+                        <div class="flex flex-wrap gap-2.5">
+                            <span
+                                class="px-3.5 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 cursor-default">CI/CD</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 cursor-default">Jenkins</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 cursor-default">GitHub Actions</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 cursor-default">Agile</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-orange-500/20 transition-all duration-300 cursor-default">AWS</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 cursor-default">EC2</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 cursor-default">VPC</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 cursor-default">S3</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 cursor-default">Lambda</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 cursor-default">RDS</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 cursor-default">IAM</span>
+                        </div>
+                    </div>
+
+                    <!-- Containerization & IaC -->
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Containerization & IaC</p>
+                        <div class="flex flex-wrap gap-2.5">
+                            <span
+                                class="px-3.5 py-1.5 bg-cyan-50 dark:bg-cyan-900/20 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 cursor-default">Docker</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-cyan-50 dark:bg-cyan-900/20 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 cursor-default">Kubernetes</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-cyan-50 dark:bg-cyan-900/20 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 cursor-default">Helm</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 cursor-default">Terraform</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 cursor-default">Ansible</span>
+                        </div>
+                    </div>
+
+                    <!-- Development & Databases -->
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Development & Databases</p>
+                        <div class="flex flex-wrap gap-2.5">
+                            <span
+                                class="px-3.5 py-1.5 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300 cursor-default">Python</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300 cursor-default">Bash</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300 cursor-default">Node.js</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300 cursor-default">MySQL</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300 cursor-default">DynamoDB</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300 cursor-default">SQL</span>
+                        </div>
+                    </div>
+
+                    <!-- Systems & Tools -->
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Systems & Tools</p>
+                        <div class="flex flex-wrap gap-2.5">
+                            <span
+                                class="px-3.5 py-1.5 bg-slate-100 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-slate-500/20 transition-all duration-300 cursor-default">Linux (Ubuntu/RHEL)</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-slate-100 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-slate-500/20 transition-all duration-300 cursor-default">Windows Server</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-slate-100 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-slate-500/20 transition-all duration-300 cursor-default">Active Directory</span>
+                            <span
+                                class="px-3.5 py-1.5 bg-slate-100 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 rounded-xl text-sm font-semibold hover:scale-105 hover:shadow-lg hover:shadow-slate-500/20 transition-all duration-300 cursor-default">Nginx</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="glass-card rounded-3xl p-8 col-span-1 md:col-span-2 flex flex-col justify-center">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="graduation-cap" class="w-6 h-6 text-blue-500"></i>
+                    Education
+                </h2>
+                <div class="space-y-8 relative">
+                    <!-- Vertical Line -->
+                    <div class="absolute left-6 top-2 bottom-2 w-0.5 bg-slate-200 dark:bg-slate-700"></div>
+
+                    <div class="flex gap-6 items-start relative">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0 text-blue-600 dark:text-blue-400 font-bold text-lg relative z-10 ring-4 ring-white dark:ring-slate-800">
+                            BM
+                        </div>
+                        <div>
+                            <h3
+                                class="text-xl font-bold text-black dark:text-white leading-tight mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                                Management Information Systems</h3>
+                            <p class="text-blue-600 dark:text-blue-400 font-medium text-sm mb-2">Bachelor's Degree</p>
+                            <p class="text-blue-700 dark:text-blue-300 text-xs font-bold font-mono mb-1">Burdur Mehmet
+                                Akif Ersoy University</p>
+                            <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+                                <p class="text-black dark:text-white text-xs font-mono">2020 - 2025</p>
+                                <p class="text-black dark:text-white text-xs font-mono">GPA: 3.25</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start relative">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0 text-blue-600 dark:text-blue-400 font-bold text-lg relative z-10 ring-4 ring-white dark:ring-slate-800">
+                            AD
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-black dark:text-white leading-tight mb-2">
+                                Computer Programming</h3>
+                            <p class="text-blue-600 dark:text-blue-400 font-medium text-sm mb-2">Associate's Degree</p>
+                            <p class="text-amber-700 dark:text-amber-400 text-xs font-bold font-mono mb-1">Atatürk
+                                University</p>
+                            <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+                                <p class="text-black dark:text-white text-xs font-mono">2020 - 2022</p>
+                                <p class="text-black dark:text-white text-xs font-mono">GPA: 3.34</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start relative">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0 text-green-600 dark:text-green-400 font-bold text-lg relative z-10 ring-4 ring-white dark:ring-slate-800">
+                            AD
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-black dark:text-white leading-tight mb-2">
+                                Securities & Capital Markets</h3>
+                            <p class="text-green-600 dark:text-green-400 font-medium text-sm mb-2">Associate's Degree
+                            </p>
+                            <p class="text-indigo-700 dark:text-indigo-400 text-xs font-bold font-mono mb-1">Anadolu
+                                University</p>
+                            <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+                                <p class="text-black dark:text-white text-xs font-mono">2024 - Present</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Experience -->
+        <div id="experience" class="glass-card rounded-3xl p-8">
+            <div class="flex items-center gap-3 mb-6">
+                <h2 class="text-2xl font-bold text-slate-800 dark:text-white">Professional Experience</h2>
+                <span
+                    class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded text-xs font-bold">Internship</span>
+            </div>
+
+            <div class="relative border-l border-slate-200 dark:border-slate-700 ml-3 space-y-8 pb-2">
+                <!-- Job Item -->
+                <div class="ml-6 relative">
+                    <div
+                        class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-blue-500 border-4 border-white dark:border-slate-800 shadow-sm">
+                    </div>
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">IT Helpdesk & System Administrator
+                            Intern</h3>
+                        <span
+                            class="text-sm font-mono text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Feb
+                            2024 - Jun 2024</span>
+                    </div>
+                    <p class="text-blue-600 dark:text-blue-400 font-medium text-sm mb-3">Yeşilova Holding • Bursa,
+                        Turkey</p>
+                    <ul
+                        class="list-disc list-inside text-slate-600 dark:text-slate-400 text-sm space-y-1 marker:text-blue-400">
+                        <li>Set up and configured over <strong>50 employee computers</strong> by performing OS
+                            installations, creating disk images with <strong>Acronis True Image</strong>, backing up
+                            user emails, and installing required software.</li>
+                        <li>Developed a <strong>Winget-based automation script</strong> that streamlined software
+                            deployment across employee machines and servers, reducing manual setup time by more than
+                            <strong>40%</strong>.
+                        </li>
+                        <li>Provided technical support for hardware and software issues in person, via phone, email, and
+                            remote access tools, while analyzing incoming support requests to identify recurring
+                            problems and implement long-term solutions.</li>
+                        <li>Built hands-on experience with <strong>Active Directory</strong>, <strong>Exchange
+                                Server</strong> and group policy management.</li>
+                        <li>Assisted in monitoring and reporting system performance using <strong>Grafana</strong>
+                            dashboards, building hands-on skills.</li>
+                        <li>Worked with <strong>Fortinet firewalls</strong> and <strong>Aruba network switches</strong>
+                            within the corporate network infrastructure.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Projects (The Meat) -->
+        <div id="projects" class="space-y-4">
+            <h2 class="text-2xl font-bold text-slate-800 dark:text-white px-2">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Project 1 -->
+                <div class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all duration-300 flex flex-col group">
+                    <div class="mb-4 flex justify-between items-start">
+                        <div
+                            class="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-xl text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <i data-lucide="container" class="w-6 h-6"></i>
+                        </div>
+                        <a href="#"
+                            class="text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-white"><i
+                                data-lucide="external-link" class="w-5 h-5"></i></a>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Kubernetes WordPress Deployment
+                    </h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+                        Scalable WordPress deployment with Terraform, featuring environment isolation, RBAC access control, and automated CI/CD processes.
+                    </p>
+                    <div class="mt-auto flex flex-wrap gap-2">
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">Kubernetes</span>
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">Terraform</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all duration-300 flex flex-col group">
+                    <div class="mb-4 flex justify-between items-start">
+                        <div
+                            class="p-3 bg-orange-50 dark:bg-orange-900/30 rounded-xl text-orange-600 dark:text-orange-400 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                            <i data-lucide="cloud-lightning" class="w-6 h-6"></i>
+                        </div>
+                        <a href="#"
+                            class="text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-white"><i
+                                data-lucide="external-link" class="w-5 h-5"></i></a>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">AWS Resilient Architecture</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+                        Multi-tier architecture with VPC, ALB, Auto Scaling, EFS, and Aurora RDS. Designed for high
+                        availability and resilience.
+                    </p>
+                    <div class="mt-auto flex flex-wrap gap-2">
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">AWS
+                            EC2</span>
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">VPC</span>
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">ALB</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all duration-300 flex flex-col group">
+                    <div class="mb-4 flex justify-between items-start">
+                        <div
+                            class="p-3 bg-green-50 dark:bg-green-900/30 rounded-xl text-green-600 dark:text-green-400 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                            <i data-lucide="git-branch-plus" class="w-6 h-6"></i>
+                        </div>
+                        <a href="#"
+                            class="text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-white"><i
+                                data-lucide="external-link" class="w-5 h-5"></i></a>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">CI/CD with CodePipeline</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+                        Automated pipeline using GitHub, S3, and CodePipeline. Builds and deploys changes automatically
+                        on push.
+                    </p>
+                    <div class="mt-auto flex flex-wrap gap-2">
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">CI/CD</span>
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">S3</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all duration-300 flex flex-col group">
+                    <div class="mb-4 flex justify-between items-start">
+                        <div
+                            class="p-3 bg-red-50 dark:bg-red-900/30 rounded-xl text-red-600 dark:text-red-400 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                            <i data-lucide="server" class="w-6 h-6"></i>
+                        </div>
+                        <a href="#"
+                            class="text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-white"><i
+                                data-lucide="external-link" class="w-5 h-5"></i></a>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Serverless Ride-Sharing App</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+                        End-to-end app with Amplify, Cognito, DynamoDB, and Lambda. Integrated with CI/CD for automated
+                        delivery.
+                    </p>
+                    <div class="mt-auto flex flex-wrap gap-2">
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">Lambda</span>
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">DynamoDB</span>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all duration-300 flex flex-col group">
+                    <div class="mb-4 flex justify-between items-start">
+                        <div
+                            class="p-3 bg-red-50 dark:bg-red-900/30 rounded-xl text-red-600 dark:text-red-400 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                            <i data-lucide="phone" class="w-6 h-6"></i>
+                        </div>
+                        <a href="#"
+                            class="text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-white"><i
+                                data-lucide="external-link" class="w-5 h-5"></i></a>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">IaC Phonebook Deployment</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+                        Provisioned EC2/IAM with Terraform. Automated app deployment and MySQL config using Ansible.
+                    </p>
+                    <div class="mt-auto flex flex-wrap gap-2">
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">Ansible</span>
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">Terraform</span>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="glass-card rounded-2xl p-6 hover:shadow-lg transition-all duration-300 flex flex-col group">
+                    <div class="mb-4 flex justify-between items-start">
+                        <div
+                            class="p-3 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl text-indigo-600 dark:text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                            <i data-lucide="scan-face" class="w-6 h-6"></i>
+                        </div>
+                        <a href="#"
+                            class="text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-white"><i
+                                data-lucide="external-link" class="w-5 h-5"></i></a>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Facial Recognition System</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+                        Python Boto3 script interacting with Amazon Rekognition and S3 to index and match faces.
+                        Automated image upload and matching process.
+                    </p>
+                    <div class="mt-auto flex flex-wrap gap-2">
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">Python</span>
+                        <span
+                            class="text-[10px] font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md">Rekognition</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center py-8 pb-24 text-slate-500 dark:text-slate-400 text-sm">
+            <p>&copy; 2025 Emir Koyunoğlu. Built with Tailwind CSS, Lucide Icons & Vanilla JavaScript.</p>
+        </footer>
+
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="contact-toast"
+        class="fixed top-6 left-6 md:left-auto md:right-auto md:top-6 md:transform md:-translate-x-1/2 z-50 hidden animate-fade-in">
+        <div
+            class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-slate-700 dark:border-slate-200">
+            <i data-lucide="check-circle" class="w-5 h-5 text-green-400 dark:text-green-600"></i>
+            <div>
+                <p class="font-bold text-sm">Ready to connect?</p>
+                <p class="text-xs text-slate-400 dark:text-slate-500">Email: emirkoyunoglu@hotmail.com</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Dark Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check local storage or system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+        });
+
+        // Copy to clipboard functionality (Optional helper)
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            const toast = document.getElementById('contact-toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>
